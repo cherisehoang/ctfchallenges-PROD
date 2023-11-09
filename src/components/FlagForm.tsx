@@ -8,7 +8,6 @@ interface FlagProps {
 }
 
 const FlagForm: React.FC <FlagProps> = ({ correctFlag }) => {
-  // const [userInput, setUserInput] = useState('');
   const [answerCorrectness, setAnswerCorrectness] = useState(false);
   const userInput = useRef<HTMLInputElement | null>(null);
 
@@ -22,14 +21,13 @@ const FlagForm: React.FC <FlagProps> = ({ correctFlag }) => {
         setAnswerCorrectness(false);
       }
     }
+    setMessage('The correct answer is: ' + correctFlag);
   };
-  // console.log(answerCorrectness);
-  // console.log("user: " + userInput);
-  // console.log("correct: " + correctFlag);
-  // Check if the user's input matches the "flag" in challengeData
+  const [message, setMessage] = useState('');
 
+  
   return (
-    <form className="my-10">
+    <form className="my-10" onSubmit={handleSubmit}>
       <span className="mr-2">COOL&#123;</span>
       <input
         type="text"
@@ -39,7 +37,11 @@ const FlagForm: React.FC <FlagProps> = ({ correctFlag }) => {
       />
       <span className="ml-2">&#125;</span>
       {/* <button onClick={handleSubmit}>button</button> */}
-      <SubmitButton onClick={handleSubmit} answerCorrectness={answerCorrectness}/>
+      {/* <SubmitButton onClick={handleSubmit} answerCorrectness={answerCorrectness}/> */}
+      <div>
+        <button type="submit" className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm my-5 px-5 py-2.5 text-center mr-2 mb-2">Submit</button>
+        {<span>{message}</span>}
+      </div>
     </form>
   );
 }
